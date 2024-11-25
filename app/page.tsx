@@ -1,7 +1,5 @@
 "use client";
 
-import Carrousel from "@/components/Carrousel";
-import Navbar from "@/components/Navbar";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import Image from "next/image";
@@ -13,7 +11,11 @@ import {
 import { BsStars } from "react-icons/bs";
 import { FaArrowDown } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
+
 import { createCita, getCitas } from "./actions/calendar";
+
+import Navbar from "@/components/Navbar";
+import Carrousel from "@/components/Carrousel";
 import { EventType } from "@/types";
 
 export default function Component() {
@@ -31,6 +33,7 @@ export default function Component() {
 
   const listCitas = async () => {
     const res = await getCitas();
+
     if (res && res.length > 0) setMeeting(res);
     else setMeeting(null);
   };
@@ -40,14 +43,16 @@ export default function Component() {
   }, []);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
+
     setFormData({ ...formData, [name]: value });
   };
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -64,7 +69,11 @@ export default function Component() {
 
     console.log("🚀 ~ handleSubmit ~ event:", event);
 
-    const res = await createCita(event,{...formData,name:`Maquillar: ${formData.name}`});
+    const res = await createCita(event, {
+      ...formData,
+      name: `Maquillar: ${formData.name}`,
+    });
+
     if (res.success) {
       alert("Cita agendada con exito!");
     } else {
@@ -135,9 +144,9 @@ export default function Component() {
               <span className="text-[#FF8B8B]">PROFESIONAL</span>
             </h1>
             <Button
-              type="submit"
-              color="secondary"
               className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
+              color="secondary"
+              type="submit"
             >
               SOLICITAR SERVICIO
             </Button>
@@ -151,11 +160,11 @@ export default function Component() {
                 <div className="absolute top-[160px] left-0 h-px w-[120px] bg-white" />
                 <div className="absolute top-[157px] left-[120px] h-2 w-2 rounded-full bg-white" />
                 <Image
-                  src="/img/maquillaje-1-sin-fondo.png"
                   alt="Maquillaje profesional"
-                  width={350}
-                  height={350}
                   className=" absolute -right-16 bottom-0"
+                  height={350}
+                  src="/img/maquillaje-1-sin-fondo.png"
+                  width={350}
                 />
               </div>
             </div>
@@ -167,11 +176,11 @@ export default function Component() {
                 <div className="absolute top-[160px] left-0 h-px w-[120px] bg-white" />
                 <div className="absolute top-[157px] left-[120px] h-2 w-2 rounded-full bg-white" />
                 <Image
-                  src="/img/maquillaje-2-sin-fondo.png"
                   alt="Maquillaje profesional"
-                  width={300}
-                  height={300}
                   className=" absolute -right-16 bottom-0"
+                  height={300}
+                  src="/img/maquillaje-2-sin-fondo.png"
+                  width={300}
                 />
               </div>
             </div>
@@ -230,9 +239,9 @@ export default function Component() {
               </p>
               <p>Descuento hasta fin de año!</p>
               <Button
-                type="submit"
-                color="secondary"
                 className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
+                color="secondary"
+                type="submit"
               >
                 SOLICITAR SERVICIO
               </Button>
@@ -293,9 +302,9 @@ export default function Component() {
               </p>
               <p>Descuento hasta fin de año!</p>
               <Button
-                type="submit"
-                color="secondary"
                 className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
+                color="secondary"
+                type="submit"
               >
                 SOLICITAR SERVICIO
               </Button>
@@ -306,22 +315,22 @@ export default function Component() {
 
       {/* Solicitar servicio */}
       <section
-        id="servicios"
         className="w-full flex flex-col justify-start items-center text-[#363636] gap-12 mt-24"
+        id="servicios"
       >
         <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl text-[#363636]">
           SOLICITAR SERVICIO
         </h2>
-        <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-xl">
+        <form className="flex flex-col w-full max-w-xl" onSubmit={handleSubmit}>
           {/* Nombre */}
           <div className="mb-4">
             <Input
-              label="Nombre completo"
-              className="w-full rounded-lg"
-              type="text"
-              id="name"
-              name="name"
               required
+              className="w-full rounded-lg"
+              id="name"
+              label="Nombre completo"
+              name="name"
+              type="text"
               value={formData.name}
               onChange={handleChange}
             />
@@ -329,25 +338,25 @@ export default function Component() {
 
           <div className="mb-4">
             <Input
-              label="Telefono"
+              required
               className="w-full rounded-lg"
-              type="text"
               id="phone"
+              label="Telefono"
               name="phone"
+              type="text"
               value={formData.phone}
               onChange={handleChange}
-              required
             />
           </div>
 
           {/* Correo */}
           <div className="mb-4">
             <Input
-              label="Correo electronico"
               className="w-full rounded-lg"
-              type="email"
               id="email"
+              label="Correo electronico"
               name="email"
+              type="email"
               value={formData.email}
               onChange={handleChange}
             />
@@ -355,32 +364,32 @@ export default function Component() {
 
           <div className="mb-4">
             <Input
-              label="Direccion"
+              required
               className="w-full rounded-lg"
-              type="text"
               id="address"
+              label="Direccion"
               name="address"
+              type="text"
               value={formData.address}
               onChange={handleChange}
-              required
             />
           </div>
 
           {/* Tipo de Servicio */}
           <div className="mb-4">
             <label
-              htmlFor="serviceType"
               className="block text-gray-700 font-medium mb-2"
+              htmlFor="serviceType"
             >
               Tipo de servicio
             </label>
             <select
+              required
+              className="w-full border px-4 py-2 rounded-lg "
               id="serviceType"
               name="serviceType"
               value={formData.serviceType}
               onChange={handleChangeSelect}
-              required
-              className="w-full border px-4 py-2 rounded-lg "
             >
               <option value="Social">Social</option>
               <option value="Express">Express</option>
@@ -392,23 +401,23 @@ export default function Component() {
           {meeting && meeting.length > 0 ? (
             <div className="mb-4">
               <label
-                htmlFor="serviceType"
                 className="block text-gray-700 font-medium mb-2"
+                htmlFor="serviceType"
               >
                 Fecha y hora
               </label>
               <select
+                required
+                className="w-full border px-4 py-2 rounded-lg "
                 id="datetime"
                 name="eventId"
                 value={formData.eventId}
                 onChange={handleChangeSelect}
-                required
-                className="w-full border px-4 py-2 rounded-lg "
               >
                 <option value="no seleccionado">No seleccionado</option>
                 {meeting.map((meet, i) => {
                   return (
-                    <option value={meet.id} key={meet.id}>
+                    <option key={meet.id} value={meet.id}>
                       {new Date(meet.start.dateTime).toLocaleDateString()},{" "}
                       {new Date(meet.start.dateTime)
                         .toISOString()
@@ -422,8 +431,8 @@ export default function Component() {
           ) : (
             <div className="mb-4">
               <label
-                htmlFor="serviceType"
                 className="block text-gray-700 font-medium mb-2"
+                htmlFor="serviceType"
               >
                 No hay citas disponibles
               </label>
@@ -433,26 +442,26 @@ export default function Component() {
           {/* Mensaje */}
           <div className="mb-4">
             <label
-              htmlFor="message"
               className="block text-gray-700 font-medium mb-2"
+              htmlFor="message"
             >
               Mensaje adicional (opcional)
             </label>
             <textarea
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none"
               id="message"
               name="message"
+              placeholder="Déjanos un mensaje si tienes alguna preferencia específica"
               value={formData.message}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none"
-              placeholder="Déjanos un mensaje si tienes alguna preferencia específica"
             />
           </div>
 
           {/* Botón de envío */}
           <Button
-            type="submit"
-            color="secondary"
             className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
+            color="secondary"
+            type="submit"
           >
             ENVIAR SOLICITUD
           </Button>
@@ -461,48 +470,48 @@ export default function Component() {
 
       {/* Services Section */}
       <section
-        id="mis-trabajos"
         className="w-full flex flex-col justify-start items-center text-[#363636] gap-4 mt-24"
+        id="mis-trabajos"
       >
         <h2 className="text-2xl font-bold text-[#363636]">
           UNA MUESTRA DE MIS TRABAJOS A CONTINUACION
         </h2>
-        <FaArrowDown size={24} className=" text-[#FF8B8B] " />
+        <FaArrowDown className=" text-[#FF8B8B] " size={24} />
       </section>
 
       {/* Gallery Section */}
       <section className="w-full  text-[#363636] gap-4 my-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {galleryImages.map((src, index) => (
-            <div
+            <button
               key={index}
               className="relative h-[600px] cursor-pointer"
               onClick={() => setSelectedImage(src)}
             >
               <Image
-                src={src}
-                alt={`Gallery image ${index + 1}`}
                 fill
+                alt={`Gallery image ${index + 1}`}
                 className="object-cover rounded-lg"
+                src={src}
               />
-            </div>
+            </button>
           ))}
         </div>
       </section>
 
       {/* Image Modal */}
       {selectedImage && (
-        <div
+        <button
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative">
             <Image
-              src={selectedImage}
               alt="Enlarged gallery image"
-              width={800}
-              height={600}
               className="max-w-full max-h-[90vh] object-contain"
+              height={600}
+              src={selectedImage}
+              width={800}
             />
             <button
               className="absolute top-2 right-2 text-white"
@@ -511,7 +520,7 @@ export default function Component() {
               <MdClose className="h-6 w-6" />
             </button>
           </div>
-        </div>
+        </button>
       )}
 
       {/* Footer */}
@@ -523,19 +532,19 @@ export default function Component() {
           </div>
           <div className="flex space-x-4">
             <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
               className="hover:text-[#FF8B8B]"
+              href="https://instagram.com"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <Instagram className="h-6 w-6" />
               <span className="sr-only">Instagram</span>
             </a>
             <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
               className="hover:text-[#FF8B8B]"
+              href="https://facebook.com"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <Facebook className="h-6 w-6" />
               <span className="sr-only">Facebook</span>

@@ -12,6 +12,7 @@ export default function TemplateMail({
   };
 }) {
   const keys = Object.keys(formData) as (keyof typeof formData)[];
+
   return (
     <div
       style={{

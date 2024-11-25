@@ -1,27 +1,18 @@
 "use server";
 import { google } from "googleapis";
-import path from "path";
-import fs from "fs";
-import { EventType } from "@/types";
 import { Resend } from "resend";
+
+import { EventType } from "@/types";
 import TemplateMail from "@/components/TemplateMail";
 
 const resend = new Resend(process.env.RESEND_APIKEY);
 
 export const getCitas = async () => {
   try {
-    // Carga las credenciales de la cuenta de servicio
-    const serviceAccountPath = path.join(
-      process.cwd(),
-      "config",
-      "service-account.json"
-    );
-    const credentials = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
-
-    // Autenticación con GoogleAuth y cliente JWT
+    // Autenticación con cliente JWT
     const auth = new google.auth.JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
+      email: process.env.CLIENT_EMAIL,
+      key: process.env.PRIVATE_KEY,
       scopes: ["https://www.googleapis.com/auth/calendar"],
     });
 
@@ -60,6 +51,7 @@ export const getCitas = async () => {
     return citas;
   } catch (error) {
     console.log("🚀 ~ getCitas ~ error:", error);
+
     return null;
   }
 };
@@ -74,21 +66,13 @@ export const createCita = async (
     address: string;
     phone: string;
     eventId: string;
-  }
+  },
 ) => {
   try {
-    // Carga las credenciales de la cuenta de servicio
-    const serviceAccountPath = path.join(
-      process.cwd(),
-      "config",
-      "service-account.json"
-    );
-    const credentials = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
-
     // Autenticación con cliente JWT
     const auth = new google.auth.JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
+      email: process.env.CLIENT_EMAIL,
+      key: process.env.PRIVATE_KEY,
       scopes: ["https://www.googleapis.com/auth/calendar"],
     });
 
@@ -106,7 +90,7 @@ export const createCita = async (
       eventId: event.id,
     });
     console.log(
-      `Evento eliminado del calendario ${sourceCalendarId}: ${event.id}`
+      `Evento eliminado del calendario ${sourceCalendarId}: ${event.id}`,
     );
 
     // Crear el evento en el nuevo calendario
@@ -121,8 +105,9 @@ export const createCita = async (
       calendarId: targetCalendarId,
       requestBody: newEvent,
     });
+
     console.log(
-      `Evento creado en el calendario ${targetCalendarId}: ${createdEvent.data.id}`
+      `Evento creado en el calendario ${targetCalendarId}: ${createdEvent.data.id}`,
     );
 
     await resend.emails.send({
@@ -135,6 +120,7 @@ export const createCita = async (
     return { success: true, createdEvent: createdEvent.data };
   } catch (error) {
     console.log("🚀 ~ createCita ~ error:", error);
+
     return { error: "Ocurrió un error al crear la cita." };
   }
 };
