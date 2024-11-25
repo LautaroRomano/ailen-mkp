@@ -21,8 +21,7 @@ export const getCitas = async () => {
 
     // Obtener eventos del calendario
     const events = await calendar.events.list({
-      calendarId:
-        "549a7ecda40d8f6552f0427c1a24798b0672b89cdb88eb28e59c04c6c6b93dbc@group.calendar.google.com",
+      calendarId: process.env.SOURCE_CALENDAR_ID,
       timeMin: new Date().toISOString(),
       maxResults: 10,
       singleEvents: true,
@@ -78,20 +77,11 @@ export const createCita = async (
 
     const calendar = google.calendar({ version: "v3", auth });
 
-    // IDs de los calendarios
-    const sourceCalendarId =
-      "549a7ecda40d8f6552f0427c1a24798b0672b89cdb88eb28e59c04c6c6b93dbc@group.calendar.google.com";
-    const targetCalendarId =
-      "a26a815a8f2c9508f3a155761273b62af75f89c196d01da1a6ba97e7b93355ab@group.calendar.google.com";
-
     // Borrar el evento del calendario original
     await calendar.events.delete({
-      calendarId: sourceCalendarId,
+      calendarId: process.env.SOURCE_CALENDAR_ID,
       eventId: event.id,
     });
-    console.log(
-      `Evento eliminado del calendario ${sourceCalendarId}: ${event.id}`,
-    );
 
     // Crear el evento en el nuevo calendario
     const newEvent = {
@@ -102,17 +92,13 @@ export const createCita = async (
     };
 
     const createdEvent = await calendar.events.insert({
-      calendarId: targetCalendarId,
+      calendarId: process.env.TARGET_CALENDAR_ID,
       requestBody: newEvent,
     });
 
-    console.log(
-      `Evento creado en el calendario ${targetCalendarId}: ${createdEvent.data.id}`,
-    );
-
     await resend.emails.send({
       from: "no-reply@lemonpad.app",
-      to: "ailen.cardozo@gmail.com",
+      to: "ailen.cardozo81@gmail.com",
       subject: "Nueva cita agendada para maquillaje",
       react: TemplateMail({ formData }),
     });

@@ -44,13 +44,13 @@ export default function TemplateMail({
         <br />
         <br />
         {keys.map((key) => (
-          <>
+          <div key={key}>
             <p style={{ color: "#666", lineHeight: "1.6" }}>
               {key}: {""}
               {formData[key]}
             </p>
             <br />
-          </>
+          </div>
         ))}
         <br />
         <br />
