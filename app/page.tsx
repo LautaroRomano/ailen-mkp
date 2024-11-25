@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import Image from "next/image";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import {
   AiOutlineInstagram as Instagram,
   AiOutlineFacebook as Facebook,
@@ -13,6 +13,8 @@ import {
 import { BsStars } from "react-icons/bs";
 import { FaArrowDown } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
+import { createCita, getCitas } from "./actions/calendar";
+import { EventType } from "@/types";
 
 export default function Component() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -23,7 +25,19 @@ export default function Component() {
     serviceType: "Social",
     address: "",
     message: "",
+    eventId: "",
   });
+  const [meeting, setMeeting] = useState<EventType[] | null>(null);
+
+  const listCitas = async () => {
+    const res = await getCitas();
+    if (res && res.length > 0) setMeeting(res);
+    else setMeeting(null);
+  };
+
+  useEffect(() => {
+    listCitas();
+  }, []);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,12 +51,26 @@ export default function Component() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Formulario enviado:", formData);
-    alert(
-      "Tu solicitud ha sido enviada con éxito. ¡Nos pondremos en contacto pronto!"
-    );
+    const event = meeting?.find((m) => m.id === formData.eventId);
+
+    if (
+      formData.eventId === "" ||
+      formData.eventId === "no seleccionado" ||
+      !event
+    )
+      return alert("Debes seleccionar una fecha!");
+
+    console.log("🚀 ~ handleSubmit ~ event:", event);
+
+    const res = await createCita(event,{...formData,name:`Maquillar: ${formData.name}`});
+    if (res.success) {
+      alert("Cita agendada con exito!");
+    } else {
+      return alert("Ocurrio un error inesperado!");
+    }
+
     setFormData({
       name: "",
       email: "",
@@ -50,19 +78,22 @@ export default function Component() {
       message: "",
       address: "",
       phone: "",
+      eventId: "no seleccionado",
     });
+
+    listCitas();
   };
 
   const galleryImages = [
     "/img/maquillajes/1.jpg",
-    "/img/maquillajes/2.jpg",
-    "/img/maquillajes/3.jpg",
-    "/img/maquillajes/4.jpg",
-    "/img/maquillajes/5.jpg",
-    "/img/maquillajes/6.jpg",
-    "/img/maquillajes/7.jpg",
-    "/img/maquillajes/8.jpg",
-    "/img/maquillajes/9.jpg",
+    // "/img/maquillajes/2.jpg",
+    // "/img/maquillajes/3.jpg",
+    // "/img/maquillajes/4.jpg",
+    // "/img/maquillajes/5.jpg",
+    // "/img/maquillajes/6.jpg",
+    // "/img/maquillajes/7.jpg",
+    // "/img/maquillajes/8.jpg",
+    // "/img/maquillajes/9.jpg",
     // "/img/maquillajes/10.jpg",
     // "/img/maquillajes/11.jpg",
     // "/img/maquillajes/12.jpg",
@@ -270,7 +301,6 @@ export default function Component() {
               </Button>
             </div>
           </div>
-          
         </div>
       </section>
 
@@ -357,6 +387,48 @@ export default function Component() {
               <option value="Evento Especial">Evento Especial</option>
             </select>
           </div>
+
+          {/* Fecha de Servicio */}
+          {meeting && meeting.length > 0 ? (
+            <div className="mb-4">
+              <label
+                htmlFor="serviceType"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                Fecha y hora
+              </label>
+              <select
+                id="datetime"
+                name="eventId"
+                value={formData.eventId}
+                onChange={handleChangeSelect}
+                required
+                className="w-full border px-4 py-2 rounded-lg "
+              >
+                <option value="no seleccionado">No seleccionado</option>
+                {meeting.map((meet, i) => {
+                  return (
+                    <option value={meet.id} key={meet.id}>
+                      {new Date(meet.start.dateTime).toLocaleDateString()},{" "}
+                      {new Date(meet.start.dateTime)
+                        .toISOString()
+                        .split("T")[1]
+                        .slice(0, 5)}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          ) : (
+            <div className="mb-4">
+              <label
+                htmlFor="serviceType"
+                className="block text-gray-700 font-medium mb-2"
+              >
+                No hay citas disponibles
+              </label>
+            </div>
+          )}
 
           {/* Mensaje */}
           <div className="mb-4">
