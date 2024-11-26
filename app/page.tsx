@@ -1,133 +1,45 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
 import Image from "next/image";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import {
-  AiOutlineInstagram as Instagram,
-  AiOutlineFacebook as Facebook,
-} from "react-icons/ai";
+import { FaInstagram } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
-import { FaArrowDown } from "react-icons/fa6";
-import { MdClose } from "react-icons/md";
-
-import { createCita, getCitas } from "./actions/calendar";
 
 import Navbar from "@/components/Navbar";
 import Carrousel from "@/components/Carrousel";
-import { EventType } from "@/types";
+import ImagesGalery from "./ImagesGalery";
+import GetAService from "./GetAService";
+import {
+  Link,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 
 export default function Component() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    serviceType: "Social",
-    address: "",
-    message: "",
-    eventId: "",
-  });
-  const [meeting, setMeeting] = useState<EventType[] | null>(null);
-
-  const listCitas = async () => {
-    const res = await getCitas();
-
-    if (res && res.length > 0) setMeeting(res);
-    else setMeeting(null);
-  };
-
-  useEffect(() => {
-    listCitas();
-  }, []);
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const event = meeting?.find((m) => m.id === formData.eventId);
-
-    if (
-      formData.eventId === "" ||
-      formData.eventId === "no seleccionado" ||
-      !event
-    )
-      return alert("Debes seleccionar una fecha!");
-
-    console.log("🚀 ~ handleSubmit ~ event:", event);
-
-    const res = await createCita(event, {
-      ...formData,
-      name: `Maquillar: ${formData.name}`,
-    });
-
-    if (res.success) {
-      alert("Cita agendada con exito!");
-    } else {
-      return alert("Ocurrio un error inesperado!");
-    }
-
-    setFormData({
-      name: "",
-      email: "",
-      serviceType: "Social",
-      message: "",
-      address: "",
-      phone: "",
-      eventId: "no seleccionado",
-    });
-
-    listCitas();
-  };
-
-  const galleryImages = [
-    "/img/maquillajes/1.jpg",
-    // "/img/maquillajes/2.jpg",
-    // "/img/maquillajes/3.jpg",
-    // "/img/maquillajes/4.jpg",
-    // "/img/maquillajes/5.jpg",
-    // "/img/maquillajes/6.jpg",
-    // "/img/maquillajes/7.jpg",
-    // "/img/maquillajes/8.jpg",
-    // "/img/maquillajes/9.jpg",
-    // "/img/maquillajes/10.jpg",
-    // "/img/maquillajes/11.jpg",
-    // "/img/maquillajes/12.jpg",
-    // "/img/maquillajes/13.jpg",
-    // "/img/maquillajes/14.jpg",
-    // "/img/maquillajes/15.jpg",
-    // "/img/maquillajes/16.jpg",
-    // "/img/maquillajes/17.jpg",
-    // "/img/maquillajes/18.jpg",
-    // "/img/maquillajes/19.jpg",
-    // "/img/maquillajes/20.jpg",
-    // "/img/maquillajes/21.jpg",
-    // "/img/maquillajes/22.jpg",
-    // "/img/maquillajes/23.jpg",
-    // "/img/maquillajes/24.jpg",
-    // "/img/maquillajes/25.jpg",
-    // "/img/maquillajes/26.jpg",
-    // "/img/maquillajes/27.jpg",
-    // "/img/maquillajes/28.jpg",
-    // "/img/maquillajes/29.jpg",
-    // "/img/maquillajes/30.jpg",
-  ];
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <div className="min-h-screen bg-white">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        className="light"
+        size="2xl"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalBody>
+                <GetAService isModal={true} />
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+
       {/* Header */}
       <Navbar />
 
@@ -147,6 +59,7 @@ export default function Component() {
               className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
               color="secondary"
               type="submit"
+              onPress={onOpen}
             >
               SOLICITAR SERVICIO
             </Button>
@@ -242,6 +155,7 @@ export default function Component() {
                 className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
                 color="secondary"
                 type="submit"
+                onPress={onOpen}
               >
                 SOLICITAR SERVICIO
               </Button>
@@ -305,6 +219,7 @@ export default function Component() {
                 className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
                 color="secondary"
                 type="submit"
+                onPress={onOpen}
               >
                 SOLICITAR SERVICIO
               </Button>
@@ -313,242 +228,34 @@ export default function Component() {
         </div>
       </section>
 
-      {/* Solicitar servicio */}
-      <section
-        className="w-full flex flex-col justify-start items-center text-[#363636] gap-12 mt-24"
-        id="servicios"
-      >
-        <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl text-[#363636]">
-          SOLICITAR SERVICIO
-        </h2>
-        <form className="flex flex-col w-full max-w-xl" onSubmit={handleSubmit}>
-          {/* Nombre */}
-          <div className="mb-4">
-            <Input
-              required
-              className="w-full rounded-lg"
-              id="name"
-              label="Nombre completo"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Input
-              required
-              className="w-full rounded-lg"
-              id="phone"
-              label="Telefono"
-              name="phone"
-              type="text"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* Correo */}
-          <div className="mb-4">
-            <Input
-              className="w-full rounded-lg"
-              id="email"
-              label="Correo electronico"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Input
-              required
-              className="w-full rounded-lg"
-              id="address"
-              label="Direccion"
-              name="address"
-              type="text"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* Tipo de Servicio */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="serviceType"
-            >
-              Tipo de servicio
-            </label>
-            <select
-              required
-              className="w-full border px-4 py-2 rounded-lg "
-              id="serviceType"
-              name="serviceType"
-              value={formData.serviceType}
-              onChange={handleChangeSelect}
-            >
-              <option value="Social">Social</option>
-              <option value="Express">Express</option>
-              <option value="Evento Especial">Evento Especial</option>
-            </select>
-          </div>
-
-          {/* Fecha de Servicio */}
-          {meeting && meeting.length > 0 ? (
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 font-medium mb-2"
-                htmlFor="serviceType"
-              >
-                Fecha y hora
-              </label>
-              <select
-                required
-                className="w-full border px-4 py-2 rounded-lg "
-                id="datetime"
-                name="eventId"
-                value={formData.eventId}
-                onChange={handleChangeSelect}
-              >
-                <option value="no seleccionado">No seleccionado</option>
-                {meeting.map((meet, i) => {
-                  return (
-                    <option key={meet.id} value={meet.id}>
-                      {new Date(meet.start.dateTime).toLocaleDateString()},{" "}
-                      {new Date(meet.start.dateTime)
-                        .toISOString()
-                        .split("T")[1]
-                        .slice(0, 5)}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          ) : (
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 font-medium mb-2"
-                htmlFor="serviceType"
-              >
-                No hay citas disponibles
-              </label>
-            </div>
-          )}
-
-          {/* Mensaje */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="message"
-            >
-              Mensaje adicional (opcional)
-            </label>
-            <textarea
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none"
-              id="message"
-              name="message"
-              placeholder="Déjanos un mensaje si tienes alguna preferencia específica"
-              value={formData.message}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* Botón de envío */}
-          <Button
-            className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
-            color="secondary"
-            type="submit"
-          >
-            ENVIAR SOLICITUD
-          </Button>
-        </form>
-      </section>
-
-      {/* Services Section */}
-      <section
-        className="w-full flex flex-col justify-start items-center text-[#363636] gap-4 mt-24"
-        id="mis-trabajos"
-      >
-        <h2 className="text-2xl font-bold text-[#363636]">
-          UNA MUESTRA DE MIS TRABAJOS A CONTINUACION
-        </h2>
-        <FaArrowDown className=" text-[#FF8B8B] " size={24} />
-      </section>
-
-      {/* Gallery Section */}
-      <section className="w-full  text-[#363636] gap-4 my-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {galleryImages.map((src, index) => (
-            <button
-              key={index}
-              className="relative h-[600px] cursor-pointer"
-              onClick={() => setSelectedImage(src)}
-            >
-              <Image
-                fill
-                alt={`Gallery image ${index + 1}`}
-                className="object-cover rounded-lg"
-                src={src}
-              />
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Image Modal */}
-      {selectedImage && (
-        <button
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative">
-            <Image
-              alt="Enlarged gallery image"
-              className="max-w-full max-h-[90vh] object-contain"
-              height={600}
-              src={selectedImage}
-              width={800}
-            />
-            <button
-              className="absolute top-2 right-2 text-white"
-              onClick={() => setSelectedImage(null)}
-            >
-              <MdClose className="h-6 w-6" />
-            </button>
-          </div>
-        </button>
-      )}
+      <GetAService isModal={false} />
+      <ImagesGalery />
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white px-4 py-8 md:px-6">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <span className="text-xl font-semibold">AILEN MKP</span>
-            <p className="text-sm mt-2">Maquillaje Profesional</p>
+      <footer
+        id="footer"
+        className="bg-gradient-to-b from-white to-[#FF8B8B] -mt-[800px]"
+      >
+        <div className="flex h-[1000px] justify-evenly items-end pb-16">
+          <div className="flex flex-col">
+            <Link href="https://www.instagram.com/ailen.mkp/" target="_blank">
+              <Image
+                alt="Logo"
+                className="h-10 w-10"
+                height={60}
+                src="/img/logo.png"
+                width={60}
+              />
+            </Link>
           </div>
-          <div className="flex space-x-4">
-            <a
-              className="hover:text-[#FF8B8B]"
-              href="https://instagram.com"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Instagram className="h-6 w-6" />
-              <span className="sr-only">Instagram</span>
-            </a>
-            <a
-              className="hover:text-[#FF8B8B]"
-              href="https://facebook.com"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Facebook className="h-6 w-6" />
-              <span className="sr-only">Facebook</span>
-            </a>
+          <div className="flex flex-col">
+            <Image
+              alt="Logo"
+              className="h-10 w-10"
+              height={60}
+              src="/img/logo.png"
+              width={60}
+            />
           </div>
         </div>
       </footer>

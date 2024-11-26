@@ -14,7 +14,7 @@ export default function Navbar() {
           src="/img/logo.png"
           width={60}
         />
-        <span className="text-xl font-semibold text-gray-600">@AILEN.MKP</span>
+        <span className="text-xl font-semibold text-gray-600">@Ailen.MKP</span>
       </div>
       <nav className="hidden md:flex items-center gap-6">
         <Link
