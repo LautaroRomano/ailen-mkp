@@ -232,30 +232,44 @@ export default function Component() {
       <ImagesGalery />
 
       {/* Footer */}
-      <footer
-        id="footer"
-        className="bg-gradient-to-b from-white to-[#FF8B8B] -mt-[800px]"
-      >
-        <div className="flex h-[1000px] justify-evenly items-end pb-16">
-          <div className="flex flex-col">
-            <Link href="https://www.instagram.com/ailen.mkp/" target="_blank">
-              <Image
-                alt="Logo"
-                className="h-10 w-10"
-                height={60}
-                src="/img/logo.png"
-                width={60}
-              />
+      <footer id="footer" className=" bg-[#FF8B8B] p-4">
+        <div className="container mx-auto text-center">
+          <p className="text-white">
+            © 2024 @Ailen.MKP. Todos los derechos reservados.
+          </p>
+          <div className="flex justify-center space-x-4 mt-2">
+            <Link
+              className="text-white hover:text-gray-100"
+              href="#detalles-servicios"
+            >
+              Precios
             </Link>
-          </div>
-          <div className="flex flex-col">
-            <Image
-              alt="Logo"
-              className="h-10 w-10"
-              height={60}
-              src="/img/logo.png"
-              width={60}
-            />
+            <Link
+              className="text-white hover:text-gray-100"
+              href="#servicios"
+            >
+              Agenda
+            </Link>
+            <Link
+              className="text-white hover:text-gray-100"
+              href="#mis-trabajos"
+            >
+              Trabajos realizados
+            </Link>
+            <Link
+              className="text-white hover:text-gray-100"
+              href="https://www.instagram.com/ailen.mkp/"
+            target="_blank"
+            >
+              Sigueme en Instagram
+            </Link>
+            <Link
+              className="text-white hover:text-gray-100"
+              href="https://devsoul.vercel.app/"
+              target="_blank"
+            >
+              Creado por DevSoul
+            </Link>
           </div>
         </div>
       </footer>

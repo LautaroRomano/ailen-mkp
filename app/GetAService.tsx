@@ -15,6 +15,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
     eventId: "",
   });
   const [meeting, setMeeting] = useState<EventType[] | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const listCitas = async () => {
     const res = await getCitas();
@@ -43,19 +44,24 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const event = meeting?.find((m) => m.id === formData.eventId);
 
     if (
       formData.eventId === "" ||
       formData.eventId === "no seleccionado" ||
       !event
-    )
+    ){
+      setLoading(false)
       return alert("Debes seleccionar una fecha!");
+    }
 
     const res = await createCita(event, {
       ...formData,
-      name: `Maquillar: ${formData.name}`,
+      name: `${formData.name} - Maquillaje`,
     });
+
+    setLoading(false)
 
     if (res.success) {
       alert("Cita agendada con exito!");
@@ -225,6 +231,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
           className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
           color="secondary"
           type="submit"
+          isLoading={loading}
         >
           ENVIAR SOLICITUD
         </Button>
