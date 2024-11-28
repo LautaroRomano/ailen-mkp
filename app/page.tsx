@@ -14,7 +14,6 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
 
@@ -44,19 +43,19 @@ export default function Component() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="h-screen z-0 bg-white pb-[88px] px-16">
-        <div className="grid md:grid-cols-2 gap-8  h-full py-24">
-          <div className="space-y-6 text-start  px-6 py-12 md:px-16 flex items-start justify-center w-full flex-col relative">
-            <div className="absolute right-[100px] top-[225px] text-5xl text-[#363636]">
+      <section className="h-screen z-0 bg-white pb-[88px] px-1 sm:px-8 lg:px-6 xl:px-8 2xl:px-16 ">
+        <div className="grid lg:grid-cols-2 gap-8 h-full py-4 sm:py-12 md:py-24 ">
+          <div className="items-center lg:items-start space-y-6 text-start px-0 lg:px-0 xl:px-8 2xl:px-16 py-12 flex  justify-center w-full flex-col relative">
+            <div className="absolute right-[25px] top-[20px] sm:right-[50px] sm:top-[65px] md:right-[120px] md:top-[35px] lg:right-[0px] lg:top-[145px] xl:right-[55px] xl:top-[145px] text-3xl sm:text-5xl text-[#363636]">
               <BsStars />
             </div>
-            <h1 className="text-7xl font-bold leading-tight tracking-tighter md:text-7xl text-[#363636]">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tighter text-[#363636]">
               MAQUILLAJE
               <br />
               <span className="text-[#FF8B8B]">PROFESIONAL</span>
             </h1>
             <Button
-              className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
+              className="inline-flex items-center justify-center rounded-md bg-gray-900 px-4 sm:px-6 py-2 sm:py-3 text-sm font-medium text-white hover:bg-gray-800"
               color="secondary"
               type="submit"
               onPress={onOpen}
@@ -64,36 +63,72 @@ export default function Component() {
               SOLICITAR SERVICIO
             </Button>
           </div>
-          <div className="text-start w-full relative">
-            <div className="bg-[#363636] absolute right-[400px] bottom-0 rounded-2xl w-[350px] h-[480px] overflow-hidden">
+
+          <div className="flex flex-col sm:flex-row lg:hidden items-center justify-center w-full gap-4">
+            <div className=" bg-[#363636] rounded-2xl w-full h-[250px] overflow-hidden">
               <div className="w-full h-full relative">
-                <div className="absolute top-[130px] left-[15px]">
-                  <p className="text-[20px]">EXPRESS</p>
+                <div className="absolute top-[50px] left-[15px]">
+                  <p className="text-[16px] sm:text-[20px]">EXPRESS</p>
                 </div>
-                <div className="absolute top-[160px] left-0 h-px w-[120px] bg-white" />
-                <div className="absolute top-[157px] left-[120px] h-2 w-2 rounded-full bg-white" />
+                <div className="absolute top-[80px] left-0 h-px w-[120px] bg-white" />
+                <div className="absolute top-[77px] left-[120px] h-2 w-2 rounded-full bg-white" />
                 <Image
                   alt="Maquillaje profesional"
-                  className=" absolute -right-16 bottom-0"
-                  height={350}
+                  className="absolute -right-2 bottom-0"
                   src="/img/maquillaje-1-sin-fondo.png"
+                  height={200}
+                  width={200}
+                />
+              </div>
+            </div>
+            <div className=" bg-[#FA8072] rounded-2xl w-full h-[250px] overflow-hidden">
+              <div className="w-full h-full relative">
+                <div className="absolute top-[50px] left-[15px]">
+                  <p className="text-[16px] sm:text-[20px]">SOCIAL</p>
+                </div>
+                <div className="absolute top-[80px] left-0 h-px w-[120px] bg-white" />
+                <div className="absolute top-[77px] left-[120px] h-2 w-2 rounded-full bg-white" />
+                <Image
+                  alt="Maquillaje profesional"
+                  className="absolute -right-2 bottom-0"
+                  src="/img/maquillaje-2-sin-fondo.png"
+                  height={200}
+                  width={180}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className=" hidden lg:flex text-start w-full relative">
+            <div className=" bg-[#363636] absolute right-[50px] sm:right-[200px] md:right-[350px] lg:right-[265px] xl:right-[365px] 2xl:right-[400px] bottom-0 rounded-2xl w-[250px] h-[380px] sm:w-[300px] sm:h-[430px] md:w-[350px] md:h-[480px] lg:w-[250px] lg:h-[330px] xl:w-[320px] xl:h-[450px] overflow-hidden">
+              <div className="w-full h-full relative">
+                <div className="absolute top-[100px] sm:top-[130px] left-[15px]">
+                  <p className="text-[16px] sm:text-[20px]">EXPRESS</p>
+                </div>
+                <div className="absolute top-[130px] sm:top-[160px] left-0 h-px w-[80px] sm:w-[120px] bg-white" />
+                <div className="absolute top-[127px] sm:top-[157px] left-[80px] sm:left-[120px] h-2 w-2 rounded-full bg-white" />
+                <Image
+                  alt="Maquillaje profesional"
+                  className="absolute -right-8 sm:-right-16 bottom-0"
+                  src="/img/maquillaje-1-sin-fondo.png"
+                  height={350}
                   width={350}
                 />
               </div>
             </div>
-            <div className="bg-[#FA8072] absolute right-0 top-0 rounded-2xl w-[350px] h-[480px] overflow-hidden">
+            <div className=" bg-[#FA8072] absolute right-0 top-0 rounded-2xl  w-[250px] h-[380px] sm:w-[300px] sm:h-[430px] md:w-[350px] md:h-[480px] lg:w-[250px] lg:h-[330px] xl:w-[320px] xl:h-[450px] overflow-hidden">
               <div className="w-full h-full relative">
-                <div className="absolute top-[130px] left-[25px]">
-                  <p className="text-[20px]">SOCIAL</p>
+                <div className="absolute top-[100px] sm:top-[130px] left-[25px]">
+                  <p className="text-[16px] sm:text-[20px]">SOCIAL</p>
                 </div>
-                <div className="absolute top-[160px] left-0 h-px w-[120px] bg-white" />
-                <div className="absolute top-[157px] left-[120px] h-2 w-2 rounded-full bg-white" />
+                <div className="absolute top-[130px] sm:top-[160px] left-0 h-px w-[80px] sm:w-[120px] bg-white" />
+                <div className="absolute top-[127px] sm:top-[157px] left-[80px] sm:left-[120px] h-2 w-2 rounded-full bg-white" />
                 <Image
                   alt="Maquillaje profesional"
-                  className=" absolute -right-16 bottom-0"
-                  height={300}
+                  className="absolute -right-8 sm:-right-16 bottom-0"
                   src="/img/maquillaje-2-sin-fondo.png"
-                  width={300}
+                  height={350}
+                  width={350}
                 />
               </div>
             </div>
@@ -244,10 +279,7 @@ export default function Component() {
             >
               Precios
             </Link>
-            <Link
-              className="text-white hover:text-gray-100"
-              href="#servicios"
-            >
+            <Link className="text-white hover:text-gray-100" href="#servicios">
               Agenda
             </Link>
             <Link
@@ -259,7 +291,7 @@ export default function Component() {
             <Link
               className="text-white hover:text-gray-100"
               href="https://www.instagram.com/ailen.mkp/"
-            target="_blank"
+              target="_blank"
             >
               Sigueme en Instagram
             </Link>
