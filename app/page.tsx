@@ -138,15 +138,15 @@ export default function Component() {
 
       {/* deltalle servicio */}
       <section
-        className="w-full flex flex-col justify-start items-center text-[#363636] gap-12"
+        className="w-full flex flex-col items-center text-[#363636] gap-12"
         id="detalles-servicios"
       >
         <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl text-[#363636]">
           DETALLES DE LOS SERVICIOS
         </h2>
         {/* Maquillaje social */}
-        <div className="w-[1300px] flex gap-20 relative h-[800px]">
-          <div className="flex flex-col w-full justify-start items-start text-start gap-4">
+        <div className="w-screen lg:w-auto items-center justify-evenly flex-col lg:flex-row flex gap-10 relative h-auto lg:h-[670px] bg-red-500">
+          <div className="flex flex-col px-4 w-[50%] h-full justify-start items-start text-start gap-4">
             <div className="flex">
               <h2 className="text-4xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
                 MAQUILLAJE SOCIAL
@@ -196,20 +196,20 @@ export default function Component() {
               </Button>
             </div>
           </div>
-          <div className="flex flex-col w-full justify-end items-center">
-            <div className="flex w-full h-auto relative">
+          <div className="flex flex-col w-[50%] max-w-[500px] h-full max-h-full justify-start items-center">
+            <div className="flex w-full h-full relative">
               <Carrousel />
             </div>
           </div>
         </div>
         {/* Maquillaje express */}
-        <div className="w-[1300px] flex gap-20">
-          <div className="flex flex-col w-full justify-end items-center">
-            <div className="flex w-full h-auto relative">
+        <div className="w-screen lg:w-auto items-center justify-evenly flex-col-reverse lg:flex-row flex gap-10 relative h-auto lg:h-[670px] bg-red-500">
+          <div className="flex flex-col w-[50%] max-w-[500px] h-full max-h-full justify-start items-center">
+            <div className="flex w-full h-full relative">
               <Carrousel />
             </div>
           </div>
-          <div className="flex flex-col w-full justify-start items-start text-start gap-4">
+          <div className="flex flex-col px-4 w-[50%] h-full justify-start items-start text-start gap-4">
             <div className="flex">
               <h2 className="text-4xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
                 MAQUILLAJE EXPRESS
