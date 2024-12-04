@@ -145,8 +145,8 @@ export default function Component() {
           DETALLES DE LOS SERVICIOS
         </h2>
         {/* Maquillaje social */}
-        <div className="w-screen lg:w-auto items-center justify-evenly flex-col lg:flex-row flex gap-10 relative h-auto lg:h-[670px] bg-red-500">
-          <div className="flex flex-col px-4 w-[50%] h-full justify-start items-start text-start gap-4">
+        <div className="w-screen lg:w-auto items-center justify-evenly flex-col lg:flex-row flex gap-10 relative h-auto lg:h-[670px]">
+          <div className="flex flex-col px-4 w-full md:w-[50%] h-full justify-start items-start text-start gap-4">
             <div className="flex">
               <h2 className="text-4xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
                 MAQUILLAJE SOCIAL
@@ -175,7 +175,7 @@ export default function Component() {
             </div>
 
             <div className="flex flex-col my-12 gap-4 justify-center items-center w-full">
-              <h3 className="text-3xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
+              <h3 className="text-3xl text-center font-bold leading-tight tracking-tighter text-[#FF8B8B]">
                 PRECIO MAQUILLAJE SOCIAL
               </h3>
 
@@ -196,20 +196,20 @@ export default function Component() {
               </Button>
             </div>
           </div>
-          <div className="flex flex-col w-[50%] max-w-[500px] h-full max-h-full justify-start items-center">
+          <div className="flex flex-col w-full md:w-[50%] md:max-w-[500px] h-full max-h-full justify-start items-center">
             <div className="flex w-full h-full relative">
               <Carrousel />
             </div>
           </div>
         </div>
         {/* Maquillaje express */}
-        <div className="w-screen lg:w-auto items-center justify-evenly flex-col-reverse lg:flex-row flex gap-10 relative h-auto lg:h-[670px] bg-red-500">
-          <div className="flex flex-col w-[50%] max-w-[500px] h-full max-h-full justify-start items-center">
+        <div className="w-screen lg:w-auto items-center justify-evenly flex-col-reverse lg:flex-row flex gap-10 relative h-auto lg:h-[670px]">
+          <div className="flex flex-col w-full md:w-[50%] md:max-w-[500px] h-full max-h-full justify-start items-center">
             <div className="flex w-full h-full relative">
               <Carrousel />
             </div>
           </div>
-          <div className="flex flex-col px-4 w-[50%] h-full justify-start items-start text-start gap-4">
+          <div className="flex flex-col px-4 w-full md:w-[50%] h-full justify-start items-start text-start gap-4">
             <div className="flex">
               <h2 className="text-4xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
                 MAQUILLAJE EXPRESS
@@ -239,7 +239,7 @@ export default function Component() {
               <p>Enfocado en piel y un difuminado simple en los ojos.</p>
             </div>
             <div className="flex flex-col my-12 gap-4 justify-center items-center w-full">
-              <h3 className="text-3xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
+              <h3 className="text-3xl text-center font-bold leading-tight tracking-tighter text-[#FF8B8B]">
                 PRECIO MAQUILLAJE EXPRESS
               </h3>
 
@@ -267,41 +267,45 @@ export default function Component() {
       <ImagesGalery />
 
       {/* Footer */}
-      <footer id="footer" className=" bg-[#FF8B8B] p-4">
+      <footer id="footer" className="bg-[#FF8B8B] py-8 px-2 md:px-4">
         <div className="container mx-auto text-center">
-          <p className="text-white">
-            © 2024 @Ailen.MKP. Todos los derechos reservados.
-          </p>
-          <div className="flex justify-center space-x-4 mt-2">
-            <Link
-              className="text-white hover:text-gray-100"
-              href="#detalles-servicios"
-            >
-              Precios
-            </Link>
-            <Link className="text-white hover:text-gray-100" href="#servicios">
-              Agenda
-            </Link>
-            <Link
-              className="text-white hover:text-gray-100"
-              href="#mis-trabajos"
-            >
-              Trabajos realizados
-            </Link>
-            <Link
-              className="text-white hover:text-gray-100"
-              href="https://www.instagram.com/ailen.mkp/"
-              target="_blank"
-            >
-              Sigueme en Instagram
-            </Link>
-            <Link
-              className="text-white hover:text-gray-100"
-              href="https://devsoul.vercel.app/"
-              target="_blank"
-            >
-              Creado por DevSoul
-            </Link>
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div className="flex space-x-4">
+              <Link
+                className="text-white hover:text-gray-100"
+                href="#detalles-servicios"
+              >
+                Precios
+              </Link>
+              <Link
+                className="text-white hover:text-gray-100"
+                href="#servicios"
+              >
+                Agenda
+              </Link>
+              <Link
+                className="text-white hover:text-gray-100 hidden md:inline"
+                href="#mis-trabajos"
+              >
+                Trabajos realizados
+              </Link>
+              <Link
+                className="text-white hover:text-gray-100"
+                href="https://www.instagram.com/ailen.mkp/"
+                target="_blank"
+              >
+                <FaInstagram className="inline-block mr-1" /> Instagram
+              </Link>
+            </div>
+            <div className="flex space-x-4">
+              <Link
+                className="text-white hover:text-gray-100"
+                href="https://devsoul.vercel.app/"
+                target="_blank"
+              >
+                Creado por DevSoul
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

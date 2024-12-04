@@ -5,16 +5,23 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="flex items-center justify-between px-2 py-4 md:px-6 h-[88px] overflow-hidden z-50 bg-white">
-      <div className="flex items-center gap-2">
-        <Image
-          alt="Logo"
-          className="h-10 w-10"
-          height={60}
-          src="/img/logo.png"
-          width={60}
-        />
-        <span className="text-xl font-semibold text-gray-600">@Ailen.MKP</span>
+    <header className="flex items-center justify-between px-2 md:px-6 h-[88px] overflow-hidden z-50 bg-white">
+      <div className="hidden md:flex items-center gap-2  relative h-full w-36 mt-2">
+        <Link
+          className="text-gray-600 hover:text-gray-900"
+          href="https://www.instagram.com/ailen.mkp/"
+          target="_blank"
+        >
+          <Image
+            alt="Logo"
+            src="/img/logo-nombre.png"
+            width={150}
+            height={150}
+          />
+        </Link>
+      </div>
+      <div className="flex md:hidden items-center gap-2  relative h-full w-full justify-center mt-2">
+        <Image alt="Logo" src="/img/logo-nombre.png" width={150} height={150} />
       </div>
       <nav className="hidden md:flex items-center gap-6">
         <Link

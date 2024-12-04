@@ -18,10 +18,13 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
   const [loading, setLoading] = useState(false);
 
   const listCitas = async () => {
+    setLoading(true);
     const res = await getCitas();
 
-    if (res && res.length > 0) setMeeting(res);
-    else setMeeting(null);
+    if (res && res.length > 0) {
+      setMeeting(res);
+      setLoading(false);
+    } else setMeeting(null);
   };
 
   useEffect(() => {
@@ -51,8 +54,8 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
       formData.eventId === "" ||
       formData.eventId === "no seleccionado" ||
       !event
-    ){
-      setLoading(false)
+    ) {
+      setLoading(false);
       return alert("Debes seleccionar una fecha!");
     }
 
@@ -61,7 +64,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
       name: `${formData.name} - Maquillaje`,
     });
 
-    setLoading(false)
+    setLoading(false);
 
     if (res.success) {
       alert("Cita agendada con exito!");
@@ -84,7 +87,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
 
   return (
     <section
-      className={`w-full flex flex-col justify-start items-center text-[#363636] gap-12 ${isModal?'my-6' : "mt-24"}`}
+      className={`w-full flex flex-col justify-start items-center text-[#363636] gap-12 ${isModal ? "my-6" : "mt-24"}`}
       id="servicios"
     >
       <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl text-[#363636]">
