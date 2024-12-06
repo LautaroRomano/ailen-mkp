@@ -4,13 +4,7 @@ import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
-import {
-  Link,
-  Modal,
-  ModalBody,
-  ModalContent,
-  useDisclosure,
-} from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 
 import ImagesGalery from "./ImagesGalery";
 import GetAService from "./GetAService";
@@ -19,35 +13,16 @@ import Navbar from "@/components/Navbar";
 import Carrousel from "@/components/Carrousel";
 
 export default function Component() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   return (
     <div className="min-h-screen bg-white">
-      <Modal
-        className="light"
-        isOpen={isOpen}
-        size="2xl"
-        onOpenChange={onOpenChange}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalBody>
-                <GetAService isModal={true} />
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-
       {/* Header */}
       <Navbar />
 
       {/* Hero Section */}
-      <section className="h-screen z-0 bg-white pb-[88px] px-1 sm:px-8 lg:px-6 xl:px-8 2xl:px-16 ">
+      <section className="h-auto md:h-screen z-0 bg-white pb-[88px] px-1 sm:px-8 lg:px-6 xl:px-8 2xl:px-16 ">
         <div className="grid lg:grid-cols-2 gap-8 h-full py-4 sm:py-12 md:py-24 ">
           <div className="items-center lg:items-start space-y-6 text-start px-0 lg:px-0 xl:px-8 2xl:px-16 py-12 flex  justify-center w-full flex-col relative">
-            <div className="absolute right-[25px] top-[20px] sm:right-[50px] sm:top-[65px] md:right-[120px] md:top-[35px] lg:right-[0px] lg:top-[145px] xl:right-[55px] xl:top-[145px] text-3xl sm:text-5xl text-[#363636]">
+            <div className="absolute right-[25px] top-[20px] sm:right-[50px] sm:top-[65px] md:right-[120px] md:top-[35px] lg:right-[0px] lg:top-[45px] xl:right-[55px] xl:top-[14px] text-3xl sm:text-5xl text-[#363636]">
               <BsStars />
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tighter text-[#363636]">
@@ -59,30 +34,43 @@ export default function Component() {
               className="inline-flex items-center justify-center rounded-md bg-gray-900 px-4 sm:px-6 py-2 sm:py-3 text-sm font-medium text-white hover:bg-gray-800"
               color="secondary"
               type="submit"
-              onPress={onOpen}
+              as={"a"}
+              href="#servicios"
             >
               SOLICITAR SERVICIO
             </Button>
           </div>
 
           <div className="flex flex-col sm:flex-row lg:hidden items-center justify-center w-full gap-4">
-            <div className=" bg-[#363636] rounded-2xl w-full h-[250px] overflow-hidden">
-              <div className="w-full h-full relative">
-                <div className="absolute top-[50px] left-[15px]">
-                  <p className="text-[16px] sm:text-[20px]">EXPRESS</p>
+            <Button
+              as={"a"}
+              href="#express"
+              className="p-0 text-white bg-[#363636] rounded-2xl w-full h-[250px] overflow-hidden"
+            >
+              <div className=" h-full w-full">
+                <div className="w-full h-full relative">
+                  <div className="absolute top-[50px] left-[15px]">
+                    <p className="text-[16px] sm:text-[20px]">EXPRESS</p>
+                  </div>
+                  <div className="absolute top-[80px] left-0 h-px w-[120px] bg-white" />
+                  <div className="absolute top-[77px] left-[120px] h-2 w-2 rounded-full bg-white" />
+                  <Image
+                    alt="Maquillaje profesional"
+                    className="absolute -right-2 bottom-0"
+                    height={200}
+                    src="/img/maquillaje-1-sin-fondo.png"
+                    width={200}
+                  />
                 </div>
-                <div className="absolute top-[80px] left-0 h-px w-[120px] bg-white" />
-                <div className="absolute top-[77px] left-[120px] h-2 w-2 rounded-full bg-white" />
-                <Image
-                  alt="Maquillaje profesional"
-                  className="absolute -right-2 bottom-0"
-                  height={200}
-                  src="/img/maquillaje-1-sin-fondo.png"
-                  width={200}
-                />
               </div>
-            </div>
-            <div className=" bg-[#FA8072] rounded-2xl w-full h-[250px] overflow-hidden">
+            </Button>
+
+            <Button
+              as={"a"}
+              href="#social"
+              className="p-0 text-white bg-[#FA8072] rounded-2xl w-full h-[250px] overflow-hidden"
+            >
+            <div className="w-full h-full">
               <div className="w-full h-full relative">
                 <div className="absolute top-[50px] left-[15px]">
                   <p className="text-[16px] sm:text-[20px]">SOCIAL</p>
@@ -98,41 +86,54 @@ export default function Component() {
                 />
               </div>
             </div>
+            </Button>
           </div>
 
           <div className=" hidden lg:flex text-start w-full relative">
-            <div className=" bg-[#363636] absolute right-[50px] sm:right-[200px] md:right-[350px] lg:right-[265px] xl:right-[365px] 2xl:right-[400px] bottom-0 rounded-2xl w-[250px] h-[380px] sm:w-[300px] sm:h-[430px] md:w-[350px] md:h-[480px] lg:w-[250px] lg:h-[330px] xl:w-[320px] xl:h-[450px] overflow-hidden">
-              <div className="w-full h-full relative">
-                <div className="absolute top-[100px] sm:top-[130px] left-[15px]">
-                  <p className="text-[16px] sm:text-[20px]">EXPRESS</p>
+            <Button
+              as={"a"}
+              href="#express"
+              className=" p-0 text-white bg-[#363636] absolute right-[50px] sm:right-[200px] md:right-[350px] lg:right-[265px] xl:right-[365px] 2xl:right-[400px] bottom-0 rounded-2xl w-[250px] h-[380px] sm:w-[300px] sm:h-[430px] md:w-[350px] md:h-[480px] lg:w-[250px] lg:h-[330px] xl:w-[320px] xl:h-[450px] overflow-hidden"
+            >
+              <div className="w-full h-full">
+                <div className="w-full h-full relative">
+                  <div className="absolute top-[100px] sm:top-[130px] left-[15px]">
+                    <p className="text-[16px] sm:text-[20px]">EXPRESS</p>
+                  </div>
+                  <div className="absolute top-[130px] sm:top-[160px] left-0 h-px w-[80px] sm:w-[120px] bg-white" />
+                  <div className="absolute top-[127px] sm:top-[157px] left-[80px] sm:left-[120px] h-2 w-2 rounded-full bg-white" />
+                  <Image
+                    alt="Maquillaje profesional"
+                    className="absolute -right-8 sm:-right-16 bottom-0"
+                    height={350}
+                    src="/img/maquillaje-1-sin-fondo.png"
+                    width={350}
+                  />
                 </div>
-                <div className="absolute top-[130px] sm:top-[160px] left-0 h-px w-[80px] sm:w-[120px] bg-white" />
-                <div className="absolute top-[127px] sm:top-[157px] left-[80px] sm:left-[120px] h-2 w-2 rounded-full bg-white" />
-                <Image
-                  alt="Maquillaje profesional"
-                  className="absolute -right-8 sm:-right-16 bottom-0"
-                  height={350}
-                  src="/img/maquillaje-1-sin-fondo.png"
-                  width={350}
-                />
               </div>
-            </div>
-            <div className=" bg-[#FA8072] absolute right-0 top-0 rounded-2xl  w-[250px] h-[380px] sm:w-[300px] sm:h-[430px] md:w-[350px] md:h-[480px] lg:w-[250px] lg:h-[330px] xl:w-[320px] xl:h-[450px] overflow-hidden">
-              <div className="w-full h-full relative">
-                <div className="absolute top-[100px] sm:top-[130px] left-[25px]">
-                  <p className="text-[16px] sm:text-[20px]">SOCIAL</p>
+            </Button>
+            <Button
+              as={"a"}
+              href="#social"
+              className="p-0 text-white bg-[#FA8072] absolute right-0 top-0 rounded-2xl  w-[250px] h-[380px] sm:w-[300px] sm:h-[430px] md:w-[350px] md:h-[480px] lg:w-[250px] lg:h-[330px] xl:w-[320px] xl:h-[450px] overflow-hidden"
+            >
+              <div className="h-full w-full">
+                <div className="w-full h-full relative">
+                  <div className="absolute top-[100px] sm:top-[130px] left-[25px]">
+                    <p className="text-[16px] sm:text-[20px]">SOCIAL</p>
+                  </div>
+                  <div className="absolute top-[130px] sm:top-[160px] left-0 h-px w-[80px] sm:w-[120px] bg-white" />
+                  <div className="absolute top-[127px] sm:top-[157px] left-[80px] sm:left-[120px] h-2 w-2 rounded-full bg-white" />
+                  <Image
+                    alt="Maquillaje profesional"
+                    className="absolute -right-8 sm:-right-16 bottom-0"
+                    height={350}
+                    src="/img/maquillaje-2-sin-fondo.png"
+                    width={350}
+                  />
                 </div>
-                <div className="absolute top-[130px] sm:top-[160px] left-0 h-px w-[80px] sm:w-[120px] bg-white" />
-                <div className="absolute top-[127px] sm:top-[157px] left-[80px] sm:left-[120px] h-2 w-2 rounded-full bg-white" />
-                <Image
-                  alt="Maquillaje profesional"
-                  className="absolute -right-8 sm:-right-16 bottom-0"
-                  height={350}
-                  src="/img/maquillaje-2-sin-fondo.png"
-                  width={350}
-                />
               </div>
-            </div>
+            </Button>
           </div>
         </div>
       </section>
@@ -146,7 +147,10 @@ export default function Component() {
           DETALLES DE LOS SERVICIOS
         </h2>
         {/* Maquillaje social */}
-        <div className="w-screen lg:w-auto items-center justify-evenly flex-col lg:flex-row flex gap-10 relative h-auto lg:h-[670px]">
+        <div
+          className="w-screen lg:w-auto items-center justify-evenly flex-col lg:flex-row flex gap-10 relative h-auto lg:h-[670px]"
+          id="social"
+        >
           <div className="flex flex-col px-4 w-full md:w-[50%] h-full justify-start items-start text-start gap-4">
             <div className="flex">
               <h2 className="text-4xl font-bold leading-tight tracking-tighter text-[#FF8B8B]">
@@ -191,7 +195,8 @@ export default function Component() {
                 className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
                 color="secondary"
                 type="submit"
-                onPress={onOpen}
+                as={"a"}
+                href="#servicios"
               >
                 SOLICITAR SERVICIO
               </Button>
@@ -204,7 +209,10 @@ export default function Component() {
           </div>
         </div>
         {/* Maquillaje express */}
-        <div className="w-screen lg:w-auto items-center justify-evenly flex-col-reverse lg:flex-row flex gap-10 relative h-auto lg:h-[670px]">
+        <div
+          className="w-screen lg:w-auto items-center justify-evenly flex-col-reverse lg:flex-row flex gap-10 relative h-auto lg:h-[670px]"
+          id="express"
+        >
           <div className="flex flex-col w-full md:w-[50%] md:max-w-[500px] h-full max-h-full justify-start items-center">
             <div className="flex w-full h-full relative">
               <Carrousel />
@@ -255,7 +263,8 @@ export default function Component() {
                 className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
                 color="secondary"
                 type="submit"
-                onPress={onOpen}
+                as={"a"}
+                href="#servicios"
               >
                 SOLICITAR SERVICIO
               </Button>
@@ -264,7 +273,7 @@ export default function Component() {
         </div>
       </section>
 
-      <GetAService isModal={false} />
+      <GetAService />
       <ImagesGalery />
 
       {/* Footer */}

@@ -6,7 +6,7 @@ import { createCita, getCitas } from "./actions/calendar";
 
 import { EventType } from "@/types";
 
-export default function GetAService({ isModal }: { isModal: boolean }) {
+export default function GetAService() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -90,7 +90,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
 
   return (
     <section
-      className={`w-full flex flex-col justify-start items-center text-[#363636] gap-12 ${isModal ? "my-6" : "mt-24"}`}
+      className={`px-2 md:px-0 w-full flex flex-col justify-start items-center text-[#363636] gap-12 mt-24`}
       id="servicios"
     >
       <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl text-[#363636]">
