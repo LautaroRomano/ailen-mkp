@@ -14,14 +14,14 @@ export default function Navbar() {
         >
           <Image
             alt="Logo"
+            height={150}
             src="/img/logo-nombre.png"
             width={150}
-            height={150}
           />
         </Link>
       </div>
       <div className="flex md:hidden items-center gap-2  relative h-full w-full justify-center mt-2">
-        <Image alt="Logo" src="/img/logo-nombre.png" width={150} height={150} />
+        <Image alt="Logo" height={150} src="/img/logo-nombre.png" width={150} />
       </div>
       <nav className="hidden md:flex items-center gap-6">
         <Link

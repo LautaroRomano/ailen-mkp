@@ -1,8 +1,10 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { EventType } from "@/types";
+
 import { createCita, getCitas } from "./actions/calendar";
+
+import { EventType } from "@/types";
 
 export default function GetAService({ isModal }: { isModal: boolean }) {
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
   }, []);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
 
@@ -56,6 +58,7 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
       !event
     ) {
       setLoading(false);
+
       return alert("Debes seleccionar una fecha!");
     }
 
@@ -233,8 +236,8 @@ export default function GetAService({ isModal }: { isModal: boolean }) {
         <Button
           className="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800"
           color="secondary"
-          type="submit"
           isLoading={loading}
+          type="submit"
         >
           ENVIAR SOLICITUD
         </Button>

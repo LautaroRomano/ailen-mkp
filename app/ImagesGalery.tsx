@@ -37,11 +37,11 @@ export default function ImagesGalery() {
                     fill
                     alt={`Gallery image ${index + 1}`}
                     className="object-cover rounded-lg"
-                    src={src}
                     loading="lazy"
+                    src={src}
                   />
                 </button>
-              )
+              ),
           )}
         </div>
         {galleryImages.length > viewImages && (

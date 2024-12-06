@@ -4,11 +4,6 @@ import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
-
-import Navbar from "@/components/Navbar";
-import Carrousel from "@/components/Carrousel";
-import ImagesGalery from "./ImagesGalery";
-import GetAService from "./GetAService";
 import {
   Link,
   Modal,
@@ -17,16 +12,22 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
+import ImagesGalery from "./ImagesGalery";
+import GetAService from "./GetAService";
+
+import Navbar from "@/components/Navbar";
+import Carrousel from "@/components/Carrousel";
+
 export default function Component() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <div className="min-h-screen bg-white">
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
         className="light"
+        isOpen={isOpen}
         size="2xl"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -75,8 +76,8 @@ export default function Component() {
                 <Image
                   alt="Maquillaje profesional"
                   className="absolute -right-2 bottom-0"
-                  src="/img/maquillaje-1-sin-fondo.png"
                   height={200}
+                  src="/img/maquillaje-1-sin-fondo.png"
                   width={200}
                 />
               </div>
@@ -91,8 +92,8 @@ export default function Component() {
                 <Image
                   alt="Maquillaje profesional"
                   className="absolute -right-2 bottom-0"
-                  src="/img/maquillaje-2-sin-fondo.png"
                   height={200}
+                  src="/img/maquillaje-2-sin-fondo.png"
                   width={180}
                 />
               </div>
@@ -110,8 +111,8 @@ export default function Component() {
                 <Image
                   alt="Maquillaje profesional"
                   className="absolute -right-8 sm:-right-16 bottom-0"
-                  src="/img/maquillaje-1-sin-fondo.png"
                   height={350}
+                  src="/img/maquillaje-1-sin-fondo.png"
                   width={350}
                 />
               </div>
@@ -126,8 +127,8 @@ export default function Component() {
                 <Image
                   alt="Maquillaje profesional"
                   className="absolute -right-8 sm:-right-16 bottom-0"
-                  src="/img/maquillaje-2-sin-fondo.png"
                   height={350}
+                  src="/img/maquillaje-2-sin-fondo.png"
                   width={350}
                 />
               </div>
@@ -267,7 +268,7 @@ export default function Component() {
       <ImagesGalery />
 
       {/* Footer */}
-      <footer id="footer" className="bg-[#FF8B8B] py-8 px-2 md:px-4">
+      <footer className="bg-[#FF8B8B] py-8 px-2 md:px-4" id="footer">
         <div className="container mx-auto text-center">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div className="flex space-x-4">
